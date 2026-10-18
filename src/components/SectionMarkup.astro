@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { markup, content, site, projects } = Astro.props;
-const renderedMarkup = renderMarkup(markup, content, site, projects);
+const renderedMarkup = renderMarkup(markup, content, site, projects, import.meta.env.BASE_URL);
 ---
 
 <Fragment set:html={renderedMarkup} />

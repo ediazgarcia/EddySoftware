@@ -29,13 +29,23 @@ function escapeHtml(value: string): string {
     .replace(/'/g, '&#39;');
 }
 
-export function renderMarkup(markup: string, sectionData: unknown, siteData: unknown, projectData?: unknown) {
+export function renderMarkup(
+  markup: string,
+  sectionData: unknown,
+  siteData: unknown,
+  projectData?: unknown,
+  base = '/',
+) {
   const section = readContent(sectionData, 'section');
   const site = readContent(siteData, 'site');
   const copy = readContent(section.copy, 'section copy');
   const projects = projectData ? readContent(projectData, 'projects').projects : undefined;
 
-  const markupWithQuoteAnchors = markup.replaceAll('href="#contacto"', 'href="#cotiza-tu-proyecto"');
+  const markupWithBasePaths = markup.replace(
+    /(href|src)="\/(assets|privacidad)\//g,
+    (_match, attribute: string, path: string) => `${attribute}="${base}${path}/`,
+  );
+  const markupWithQuoteAnchors = markupWithBasePaths.replaceAll('href="#contacto"', 'href="#cotiza-tu-proyecto"');
   const renderedMarkup = markupWithQuoteAnchors.replace(
     /__COPY_([a-z0-9-]+)__|__SITE_(EMAIL|COPYRIGHT|TITLE)__|__PROJECT_(\d+)_(LABEL|TITLE|CARD_DESCRIPTION|DESCRIPTION|COLOR|DEMO|GITHUB|TAG_(\d+))__/g,
     (placeholder, copyKey: string | undefined, siteKey: string | undefined, projectIndex: string | undefined, projectField: string | undefined, tagIndex: string | undefined) => {

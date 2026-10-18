@@ -15,6 +15,13 @@ npm.cmd run build
 npm.cmd run preview
 ```
 
+## Publicar en GitHub Pages
+
+El sitio está configurado para el repositorio `EddySoftware` y se publica en
+`https://ediazgarcia.github.io/EddySoftware/`. En GitHub, abre **Settings →
+Pages** y selecciona **GitHub Actions** como origen. Cada cambio que subas a
+`main` ejecutará el flujo definido en `.github/workflows/deploy.yml`.
+
 ## Estructura
 
 ```text

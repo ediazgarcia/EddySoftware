@@ -1,13 +1,15 @@
 ---
 import PrivacyPolicy from '../content/sections/privacy-policy.md';
 import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Políticas de Privacidad | Eddy Software">
   <main class="privacy">
-    <a class="privacy__home" href="/">← Volver a Eddy Software</a>
+    <a class="privacy__home" href={base}>← Volver a Eddy Software</a>
     <PrivacyPolicy />
-    <a class="privacy__quote" href="/#cotiza-tu-proyecto">Cotiza tu proyecto</a>
+    <a class="privacy__quote" href={`${base}#cotiza-tu-proyecto`}>Cotiza tu proyecto</a>
   </main>
 </Layout>
 

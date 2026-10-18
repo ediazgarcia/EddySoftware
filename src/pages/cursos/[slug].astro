@@ -11,12 +11,13 @@ export function getStaticPaths() {
 }
 
 const { course, index } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title={`${course.title} | Cursos | Eddy Software`} description={course.description}>
   <main class="courses courses__page" style={`--course-color:${course.color}`}>
     <div class="courses__inner">
-      <a class="courses__back" href="/#cursos">← Volver a los cursos</a>
+      <a class="courses__back" href={`${base}#cursos`}>← Volver a los cursos</a>
       <div class="courses__detail-heading">
         <span class="courses__detail-number">{String(index + 1).padStart(2, '0')}</span>
         <div>

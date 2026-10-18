@@ -1,6 +1,8 @@
 ---
 import { frontmatter as content } from '../../content/sections/courses.md';
 import '../../styles/courses.css';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="cursos" class="courses" aria-labelledby="courses-title">
@@ -14,7 +16,7 @@ import '../../styles/courses.css';
     <p class="courses__intro">{content.intro}</p>
     <div class="courses__catalog" data-course-catalog>
       {content.courses.map((course, index) => (
-        <a class="courses__card" href={`/cursos/${course.slug}/`} style={`--course-color:${course.color}`}>
+        <a class="courses__card" href={`${base}cursos/${course.slug}/`} style={`--course-color:${course.color}`}>
           <span class="courses__card-top">
             <span class="courses__number">{String(index + 1).padStart(2, '0')}</span>
             <span class="courses__level">Básico → Intermedio</span>
