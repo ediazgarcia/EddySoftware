@@ -1,0 +1,11 @@
+---
+import beforeMarkup from '../content/markup/before.html?raw';
+import afterMarkup from '../content/markup/after.html?raw';
+import closingMarkup from '../content/markup/closing.html?raw';
+---
+
+<Fragment set:html={beforeMarkup} />
+<slot />
+<Fragment set:html={afterMarkup} />
+<slot name="runtime" />
+<Fragment set:html={closingMarkup} />

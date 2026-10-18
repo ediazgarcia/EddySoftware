@@ -1,0 +1,22 @@
+
+
+<sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+<div class="pm" role="dialog" aria-modal="true" aria-label="Detalle del proyecto">
+<button class="pmx" aria-label="Cerrar" sc-camel-on-click="{{ close }}"></button>
+<div class="pmp">
+<button class="pmc" aria-label="Cerrar" sc-camel-on-click="{{ close }}"><svg sc-camel-view-box="0 0 24 24" width="20" height="20" fill="none" stroke="#CFC8B8" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg></button>
+<div style="width:64px;height:64px;position:relative;margin-bottom:28px" aria-hidden="true"><div style="position:absolute;top:0;left:0;right:0;bottom:0;border-radius:50%;border:1px solid {{ sel.color }}"></div><div style="position:absolute;left:21px;top:21px;width:22px;height:22px;border-radius:50%;background:{{ sel.color }}"></div></div>
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;color:#A8A08F">{{ sel.label }}</div>
+<h3 style="margin:14px 0 18px;font-weight:300;font-size:clamp(28px,4vw,42px);letter-spacing:-.02em;line-height:1.1;color:#F7F6F2">{{ sel.title }}</h3>
+<p style="margin:0 0 28px;font-size:18px;line-height:1.7;color:#B8B09F">{{ sel.desc }}</p>
+<div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;color:#A8A08F;margin-bottom:10px">TECNOLOGÍAS</div>
+<p style="margin:0 0 36px;font-size:16px;line-height:1.6;color:#CFC8B8">{{ sel.tagsLine }}</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<sc-if value="{{ sel.hasDemo }}"><a class="btn" href="{{ sel.demo }}" target="_blank" rel="noopener" style="background:#CFC8B8;color:#151514">Ver proyecto</a></sc-if>
+<sc-if value="{{ sel.noDemo }}"><span class="btn" style="background:#CFC8B8;color:#151514;opacity:.35">Ver proyecto · próximamente</span></sc-if>
+<sc-if value="{{ sel.hasGit }}"><a class="btn" href="{{ sel.github }}" target="_blank" rel="noopener" style="border:1px solid #CFC8B8;color:#CFC8B8">GitHub</a></sc-if>
+<sc-if value="{{ sel.noGit }}"><span class="btn" style="border:1px solid #CFC8B8;color:#CFC8B8;opacity:.35">GitHub · próximamente</span></sc-if>
+</div>
+</div>
+</div>
+</sc-if>

@@ -1,0 +1,18 @@
+---
+import { frontmatter as projectData } from '../content/sections/projects.md';
+import appLogic from '../scripts/site-logic.js?raw';
+
+const projectJson = JSON.stringify(projectData.projects).replace(/</g, '\\u003c');
+---
+
+<script
+  is:inline
+  set:html={`window.__siteProjects = ${projectJson}.map((project) => ({ ...project, desc: project.description, tagsLine: project.technologies.join(' · ') }));`}
+></script>
+<script
+  is:inline
+  type="text/x-dc"
+  data-dc-script=""
+  data-props='{"$preview":{"width":1440,"height":6400}}'
+  set:html={appLogic}
+></script>

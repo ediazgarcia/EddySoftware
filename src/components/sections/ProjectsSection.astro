@@ -1,0 +1,8 @@
+---
+import { frontmatter as content } from '../../content/sections/projects.md';
+import { frontmatter as site } from '../../content/sections/site.md';
+import markup from '../../content/markup/projects.html?raw';
+import SectionMarkup from '../SectionMarkup.astro';
+---
+
+<SectionMarkup {markup} {content} {site} projects={content} />

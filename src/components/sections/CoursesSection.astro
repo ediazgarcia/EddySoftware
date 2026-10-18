@@ -1,0 +1,32 @@
+---
+import { frontmatter as content } from '../../content/sections/courses.md';
+import '../../styles/courses.css';
+---
+
+<section id="cursos" class="courses" aria-labelledby="courses-title">
+  <div class="courses__inner">
+    <div class="courses__eyebrow">
+      <span>{content.number}</span>
+      <i></i>
+      <span>{content.eyebrow}</span>
+    </div>
+    <h2 id="courses-title">{content.title}</h2>
+    <p class="courses__intro">{content.intro}</p>
+    <div class="courses__catalog" data-course-catalog>
+      {content.courses.map((course, index) => (
+        <a class="courses__card" href={`/cursos/${course.slug}/`} style={`--course-color:${course.color}`}>
+          <span class="courses__card-top">
+            <span class="courses__number">{String(index + 1).padStart(2, '0')}</span>
+            <span class="courses__level">Básico → Intermedio</span>
+          </span>
+          <h3>{course.title}</h3>
+          <p>{course.description}</p>
+          <span class="courses__enter">
+            Entrar al curso
+            <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

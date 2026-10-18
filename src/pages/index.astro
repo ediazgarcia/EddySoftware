@@ -1,0 +1,27 @@
+---
+import AppLogic from '../components/AppLogic.astro';
+import SiteFrame from '../components/SiteFrame.astro';
+import AboutSection from '../components/sections/AboutSection.astro';
+import CoursesSection from '../components/sections/CoursesSection.astro';
+import FooterSection from '../components/sections/FooterSection.astro';
+import HeroSection from '../components/sections/HeroSection.astro';
+import ProjectsSection from '../components/sections/ProjectsSection.astro';
+import QuoteWizard from '../components/sections/QuoteWizard.astro';
+import ServicesSection from '../components/sections/ServicesSection.astro';
+import TechnologiesSection from '../components/sections/TechnologiesSection.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <SiteFrame>
+    <HeroSection />
+    <AboutSection />
+    <ServicesSection />
+    <CoursesSection />
+    <TechnologiesSection />
+    <ProjectsSection />
+    <QuoteWizard />
+    <FooterSection />
+    <AppLogic slot="runtime" />
+  </SiteFrame>
+</Layout>

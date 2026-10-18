@@ -1,0 +1,41 @@
+---
+import '../styles/global.css';
+import { frontmatter as site } from '../content/sections/site.md';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preload" href="/assets/dm-mono.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/sora.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      window.__resources = {
+        'https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js':
+          '/assets/react.production.min.js',
+        'https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js':
+          '/assets/react-dom.production.min.js',
+      };
+    </script>
+    <script is:inline defer src="/assets/react.production.min.js"></script>
+    <script is:inline defer src="/assets/react-dom.production.min.js"></script>
+    <script is:inline defer src="/assets/anime.min.js"></script>
+    <script is:inline defer src="/assets/dc-runtime.js"></script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

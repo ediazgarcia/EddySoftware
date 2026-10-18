@@ -1,0 +1,73 @@
+---
+import { frontmatter as content } from '../../content/sections/courses.md';
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/courses.css';
+
+export function getStaticPaths() {
+  return content.courses.map((course, index) => ({
+    params: { slug: course.slug },
+    props: { course, index },
+  }));
+}
+
+const { course, index } = Astro.props;
+---
+
+<Layout title={`${course.title} | Cursos | Eddy Software`} description={course.description}>
+  <main class="courses courses__page" style={`--course-color:${course.color}`}>
+    <div class="courses__inner">
+      <a class="courses__back" href="/#cursos">← Volver a los cursos</a>
+      <div class="courses__detail-heading">
+        <span class="courses__detail-number">{String(index + 1).padStart(2, '0')}</span>
+        <div>
+          <p class="courses__eyebrow">FORMACIÓN · CURSO</p>
+          <h1>{course.title}</h1>
+          <p>{course.description}</p>
+          <span class="courses__level">Básico → Intermedio</span>
+        </div>
+      </div>
+      <div class="courses__curriculum">
+        {course.units.map((unit, unitIndex) => (
+          <details class="courses__unit">
+            <summary>
+              <span class="courses__unit-number">Unidad {String(unitIndex + 1).padStart(2, '0')}</span>
+              <span class="courses__unit-heading">
+                <span class="courses__unit-title">{unit.title}</span>
+                <span class="courses__unit-description">{unit.description}</span>
+              </span>
+              <span class="courses__toggle" aria-hidden="true"></span>
+            </summary>
+            <ol class="courses__topics">
+              {unit.topics.map((topic) => (
+                <li class="courses__topic">
+                  <h2>{topic.title}</h2>
+                  <p>{topic.description}</p>
+                </li>
+              ))}
+            </ol>
+          </details>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .courses__page h1 {
+    margin: 0 0 10px;
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .courses__page .courses__eyebrow {
+    margin: 0 0 12px;
+  }
+
+  .courses__page .courses__topic h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+</style>

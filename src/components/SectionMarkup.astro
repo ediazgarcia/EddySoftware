@@ -1,0 +1,15 @@
+---
+import { renderMarkup } from '../lib/render-markup';
+
+interface Props {
+  markup: string;
+  content: unknown;
+  site: unknown;
+  projects?: unknown;
+}
+
+const { markup, content, site, projects } = Astro.props;
+const renderedMarkup = renderMarkup(markup, content, site, projects);
+---
+
+<Fragment set:html={renderedMarkup} />

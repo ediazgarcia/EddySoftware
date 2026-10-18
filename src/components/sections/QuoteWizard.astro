@@ -1,0 +1,169 @@
+---
+import { frontmatter as quote } from '../../content/sections/quote-wizard.md';
+import '../../styles/quote-wizard.css';
+---
+
+<section
+  id="cotiza-tu-proyecto"
+  class="sec quote"
+  aria-labelledby="quote-title"
+  data-quote-wizard
+  data-whatsapp={quote['whatsapp-number']}
+  data-config={JSON.stringify(quote)}
+  style="position:relative;overflow:clip;background:#CFC8B8;padding:120px 32px;text-align:center"
+>
+  <div class="spin" aria-hidden="true" style="position:absolute;left:50%;top:40%;margin:-360px 0 0 -360px;width:720px;height:720px;border-radius:50%;border:1px solid rgba(24,24,23,.22)"></div>
+  <div class="spin rev" aria-hidden="true" style="position:absolute;left:50%;top:40%;margin:-250px 0 0 -250px;width:500px;height:500px;border-radius:50%;border:1px dashed rgba(24,24,23,.25)"></div>
+  <div class="drift" aria-hidden="true" style="position:absolute;left:-90px;top:10%;width:320px;height:320px;border-radius:50%;background:#FF6B4A;opacity:.18;filter:blur(70px)"></div>
+  <div class="drift" aria-hidden="true" style="position:absolute;right:-90px;top:30%;width:320px;height:320px;border-radius:50%;background:#3A86FF;opacity:.16;filter:blur(70px);animation-direction:reverse"></div>
+  <div class="float" aria-hidden="true" style="position:absolute;left:14%;bottom:30%;width:46px;height:46px;border-radius:50%;background:#F7F6F2;box-shadow:8px 12px 24px rgba(0,0,0,.18)"></div>
+  <div class="float" aria-hidden="true" style="position:absolute;right:16%;top:16%;width:18px;height:18px;border-radius:50%;background:#181817;animation-delay:-3s"></div>
+
+  <div class="quote__content">
+    <div class="shd" style="justify-content:center;color:#2E2B26">
+      <b>06</b><i></i><span>{quote.eyebrow}</span>
+    </div>
+    <h2 id="quote-title" class="quote__title">{quote.title}</h2>
+    <p class="quote__intro">{quote.intro}</p>
+
+    <form class="quote__form" novalidate>
+      <div class="quote__progress" aria-label="Progreso de solicitud">
+        {quote.steps.map((step, index) => (
+          <div class:list={['quote__progress-step', { 'is-active': index === 0 }]} data-progress-item>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <span>{step}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="quote__step" data-wizard-step="0">
+        <fieldset>
+          <legend tabindex="-1">{quote['project-question']}</legend>
+          <div class="quote__options">
+            {quote['project-types'].map((item, index) => (
+              <label class:list={['quote__option', { 'is-selected': index === 0 }]}>
+                <input type="radio" name="projectType" value={item.value} checked={index === 0} required />
+                <span class="quote__option-title">{item.label}</span>
+                <span class="quote__option-description">{item.description}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset data-platform-group>
+          <legend tabindex="-1">{quote['platform-question']}</legend>
+          <div class="quote__options">
+            {quote.platforms.map((item, index) => (
+              <label class:list={['quote__option', { 'is-selected': index === 0 }]}>
+                <input type="radio" name="platform" value={item.value} checked={index === 0} />
+                <span class="quote__option-title">{item.label}</span>
+                <span class="quote__option-description">{item.description}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset data-native-target-group hidden>
+          <legend tabindex="-1">{quote['native-target-question']}</legend>
+          <div class="quote__options">
+            {quote['native-targets'].map((item) => (
+              <label class="quote__option">
+                <input type="radio" name="nativeTarget" value={item.value} />
+                <span class="quote__option-title">{item.label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="quote__step" data-wizard-step="1" hidden>
+        <fieldset>
+          <legend tabindex="-1">{quote['scope-question']}</legend>
+          <div class="quote__options">
+            {quote.scopes.map((item, index) => (
+              <label class:list={['quote__option', { 'is-selected': index === 0 }]}>
+                <input type="radio" name="scope" value={item.value} checked={index === 0} required />
+                <span class="quote__option-title">{item.label}</span>
+                <span class="quote__option-description">{item.description}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend tabindex="-1">{quote['features-question']}</legend>
+          <p class="quote__field-hint">{quote['features-intro']}</p>
+          <div class="quote__features">
+            {quote.features.map((item) => (
+              <label class="quote__feature">
+                <input type="checkbox" name="features" value={item.value} checked />
+                <span>{item.label}</span>
+              </label>
+            ))}
+          </div>
+          <div class="quote__custom-features">
+            <label class="quote__field">
+              <span>{quote['add-feature-label']}</span>
+              <input
+                data-custom-feature-input
+                maxlength="120"
+                placeholder="Por ejemplo: reservar citas, crear reportes o enviar recordatorios"
+              />
+            </label>
+            <button class="quote__add-feature" type="button" data-action="add-feature">
+              {quote['add-feature-button']}
+            </button>
+            <ul class="quote__custom-feature-list" data-custom-feature-list aria-live="polite"></ul>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="quote__step" data-wizard-step="2" hidden>
+        <fieldset>
+          <legend tabindex="-1">{quote['design-question']}</legend>
+          <div class="quote__options">
+            {quote['design-options'].map((item, index) => (
+              <label class:list={['quote__option', { 'is-selected': index === 0 }]}>
+                <input type="radio" name="design" value={item.value} checked={index === 0} required />
+                <span class="quote__option-title">{item.label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <div class="quote__contact-fields">
+          <h3>{quote['details-heading']}</h3>
+          <p>{quote['details-description']}</p>
+          <label class="quote__field">
+            <span>{quote['name-label']}</span>
+            <input name="name" autocomplete="name" maxlength="100" placeholder={quote['name-placeholder']} />
+          </label>
+          <label class="quote__field">
+            <span>{quote['describe-app-label']}</span>
+            <textarea name="appDescription" rows="5" maxlength="1500" placeholder={quote['describe-app-placeholder']} required></textarea>
+          </label>
+        </div>
+      </div>
+
+      <section class="quote__step quote__result" data-wizard-step="3" aria-labelledby="quote-review-title" hidden>
+        <p class="quote__result-eyebrow">{quote['review-heading']}</p>
+        <h3 id="quote-review-title" tabindex="-1">{quote['review-heading']}</h3>
+        <p class="quote__result-copy">{quote['review-intro']}</p>
+        <div class="quote__result-breakdown" data-request-summary></div>
+        <a class="quote__send" data-send-request href={`https://wa.me/${quote['whatsapp-number']}`} target="_blank" rel="noopener noreferrer">{quote['send-label']}</a>
+      </section>
+
+      <p class="quote__error" data-wizard-error role="alert" hidden></p>
+      <div class="quote__actions">
+        <button class="quote__back" type="button" data-action="back" hidden>{quote['back-label']}</button>
+        <button class="quote__next" type="button" data-action="next">{quote['next-label']}</button>
+        <button class="quote__next" type="button" data-action="review" hidden>{quote['next-label']}</button>
+        <button class="quote__back" type="button" data-action="restart" hidden>{quote['start-over-label']}</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  import '../../scripts/quote-wizard.ts';
+</script>
