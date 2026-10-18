@@ -13,8 +13,11 @@ interface QuoteConfig {
   'remove-feature-label': string;
 }
 
+const initializedForms = new WeakSet<HTMLFormElement>();
+
 function initQuoteWizard(root: HTMLElement): void {
   const form = root.querySelector<HTMLFormElement>('form.quote__form');
+  if (form && initializedForms.has(form)) return;
   const configurationText = root.dataset.config;
   const whatsappNumber = root.dataset.whatsapp;
   if (!form || !configurationText || !whatsappNumber) {
@@ -53,6 +56,8 @@ function initQuoteWizard(root: HTMLElement): void {
       !customFeatureInput || !addFeatureButton || !customFeatureList) {
     throw new Error('Solicitud: el formulario no contiene todos los campos y controles esperados.');
   }
+
+  initializedForms.add(form);
 
   const setStep = (step: number): void => {
     if (step < 0 || step >= steps.length) throw new Error(`Solicitud: paso inválido (${step}).`);
@@ -269,4 +274,9 @@ function initQuoteWizard(root: HTMLElement): void {
   setStep(0);
 }
 
-document.querySelectorAll<HTMLElement>('[data-quote-wizard]').forEach(initQuoteWizard);
+const initializeQuoteWizards = (): void => {
+  document.querySelectorAll<HTMLElement>('[data-quote-wizard]').forEach(initQuoteWizard);
+};
+
+initializeQuoteWizards();
+new MutationObserver(initializeQuoteWizards).observe(document.body, { childList: true, subtree: true });
